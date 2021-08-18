@@ -16,6 +16,7 @@
 
 package com.example.android.trackmysleepquality.sleeptracker
 
+import android.content.res.Resources
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -56,18 +57,28 @@ class SleepNightAdapter: RecyclerView.Adapter<SleepNightAdapter.ViewHolder>(){
         val item = data[position]
         //set the values of viewHolder properties to the items values
         val res = holder.itemView.resources
-        holder.sleepLength.text = convertDurationToFormatted(item.startTimeMilli,item.endTimeMilli,res)
-        holder.quality.text = convertNumericQualityToString(item.sleepQuality,res)
-        holder.qualityImage.setImageResource(when(item.sleepQuality){
-            0->R.drawable.ic_sleep_0
-            1->R.drawable.ic_sleep_1
-            2->R.drawable.ic_sleep_2
-            3->R.drawable.ic_sleep_3
-            4->R.drawable.ic_sleep_4
-            5->R.drawable.ic_sleep_5
-            else->R.drawable.ic_sleep_active
-        })
+        bind(holder,item, res)
 
+    }
+
+    private fun bind(
+        holder: ViewHolder,item: SleepNight
+        res: Resources
+    ) {
+        holder.sleepLength.text =
+            convertDurationToFormatted(item.startTimeMilli, item.endTimeMilli, res)
+        holder.quality.text = convertNumericQualityToString(item.sleepQuality, res)
+        holder.qualityImage.setImageResource(
+            when (item.sleepQuality) {
+                0 -> R.drawable.ic_sleep_0
+                1 -> R.drawable.ic_sleep_1
+                2 -> R.drawable.ic_sleep_2
+                3 -> R.drawable.ic_sleep_3
+                4 -> R.drawable.ic_sleep_4
+                5 -> R.drawable.ic_sleep_5
+                else -> R.drawable.ic_sleep_active
+            }
+        )
     }
 
     //the RV must know how many items will it draw, this fun provide items count
