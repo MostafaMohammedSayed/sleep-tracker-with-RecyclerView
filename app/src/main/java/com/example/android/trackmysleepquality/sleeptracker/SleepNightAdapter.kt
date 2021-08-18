@@ -43,13 +43,7 @@ class SleepNightAdapter: RecyclerView.Adapter<SleepNightAdapter.ViewHolder>(){
     * this fun returns a viewHolder that takes a view as an argument. This function is called when the app starts
     * at first time and when the views displayed on the screen increase */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return from(parent)
-    }
-
-    fun from(parent: ViewGroup): ViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val view = layoutInflater.inflate(R.layout.list_item_sleep_night, parent, false)
-        return ViewHolder(view)
+        return Companion.from(parent)
     }
 
     /*onBindViewHolder(): is called to bind an item at a specified position in the list to the
@@ -89,6 +83,14 @@ class SleepNightAdapter: RecyclerView.Adapter<SleepNightAdapter.ViewHolder>(){
                     else -> R.drawable.ic_sleep_active
                 }
             )
+        }
+    }
+
+    companion object {
+        fun from(parent: ViewGroup): ViewHolder {
+            val layoutInflater = LayoutInflater.from(parent.context)
+            val view = layoutInflater.inflate(R.layout.list_item_sleep_night, parent, false)
+            return ViewHolder(view)
         }
     }
 }
