@@ -16,6 +16,7 @@
 
 package com.example.android.trackmysleepquality.sleeptracker
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
@@ -50,6 +51,10 @@ class SleepNightAdapter: RecyclerView.Adapter<TextItemViewHolder>(){
     override fun onBindViewHolder(holder: TextItemViewHolder, position: Int) {
         val item = data[position]
         holder.textView.text = item.sleepQuality.toString()
+        //to prove that RV recycles ViewHolders, items with sleepQuality > 1 that will be dosplayed on scroll will also show in red.
+        if (item.sleepQuality <= 1) {
+            holder.textView.setTextColor(Color.RED)
+        }
     }
 
     //the RV must know how many items will it draw, this fun provide items count
