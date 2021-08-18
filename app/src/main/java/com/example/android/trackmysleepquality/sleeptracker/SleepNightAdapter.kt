@@ -54,6 +54,8 @@ class SleepNightAdapter: RecyclerView.Adapter<TextItemViewHolder>(){
         //to prove that RV recycles ViewHolders, items with sleepQuality > 1 that will be dosplayed on scroll will also show in red.
         if (item.sleepQuality <= 1) {
             holder.textView.setTextColor(Color.RED)
+        }else{// fix the color for items with quality >1
+            holder.textView.setTextColor(Color.BLACK)
         }
     }
 
