@@ -23,21 +23,15 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.trackmysleepquality.R
 import com.example.android.trackmysleepquality.convertDurationToFormatted
 import com.example.android.trackmysleepquality.convertNumericQualityToString
 import com.example.android.trackmysleepquality.database.SleepNight
 
-class SleepNightAdapter: RecyclerView.Adapter<SleepNightAdapter.ViewHolder>(){
+class SleepNightAdapter: ListAdapter<SleepNight,SleepNightAdapter.ViewHolder>(SleepNightDiffCallback()){
 
-    //the list o be displayed
-    var data = listOf<SleepNight>()
-        set(value) {
-            field = value
-            //this adapter method notify RV when the list change and make RV re-draw the whole list
-            notifyDataSetChanged()
-        }
     /*onCreateViewHolder(): creates the viewHolder that the RV will deal with since RV does not deal
     * with data, the arguments: parent which is the RV itself, ViewType is an Int that will be used if more than 1
     * viewHolder is used, TextItemViewHolder is a pre-made viewHolder which u can find in Util.kt file,
@@ -51,15 +45,12 @@ class SleepNightAdapter: RecyclerView.Adapter<SleepNightAdapter.ViewHolder>(){
     * viewHolder. This fun also RECYCLES the views as it uses viewholders of items that are no longer on the screen
     * and reset its values with the values of the item that will be displayed on the screen  */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = data[position]
+        val item = getItem(position)
         //set the values of viewHolder properties to the items values
         holder.bind(item)
 
     }
 
-
-    //the RV must know how many items will it draw, this fun provide items count
-    override fun getItemCount()= data.size
 
     //customized viewHolder to display the data in our list item layout
     class ViewHolder private constructor(itemView : View): RecyclerView.ViewHolder(itemView){
