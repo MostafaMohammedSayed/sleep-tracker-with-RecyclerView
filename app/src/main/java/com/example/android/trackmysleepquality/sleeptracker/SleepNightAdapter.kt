@@ -43,7 +43,7 @@ class SleepNightAdapter: RecyclerView.Adapter<SleepNightAdapter.ViewHolder>(){
     * this fun returns a viewHolder that takes a view as an argument. This function is called when the app starts
     * at first time and when the views displayed on the screen increase */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return Companion.from(parent)
+        return ViewHolder.from(parent)
     }
 
     /*onBindViewHolder(): is called to bind an item at a specified position in the list to the
@@ -61,7 +61,7 @@ class SleepNightAdapter: RecyclerView.Adapter<SleepNightAdapter.ViewHolder>(){
     override fun getItemCount()= data.size
 
     //customized viewHolder to display the data in our list item layout
-    class ViewHolder(itemView : View): RecyclerView.ViewHolder(itemView){
+    class ViewHolder private constructor(itemView : View): RecyclerView.ViewHolder(itemView){
         val sleepLength: TextView = itemView.findViewById(R.id.sleep_length)
         val quality: TextView = itemView.findViewById(R.id.quality_string)
         val qualityImage: ImageView = itemView.findViewById(R.id.quality_image)
@@ -84,13 +84,12 @@ class SleepNightAdapter: RecyclerView.Adapter<SleepNightAdapter.ViewHolder>(){
                 }
             )
         }
-    }
-
-    companion object {
-        fun from(parent: ViewGroup): ViewHolder {
-            val layoutInflater = LayoutInflater.from(parent.context)
-            val view = layoutInflater.inflate(R.layout.list_item_sleep_night, parent, false)
-            return ViewHolder(view)
+        companion object {
+            fun from(parent: ViewGroup): ViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val view = layoutInflater.inflate(R.layout.list_item_sleep_night, parent, false)
+                return ViewHolder(view)
+            }
         }
     }
 }
