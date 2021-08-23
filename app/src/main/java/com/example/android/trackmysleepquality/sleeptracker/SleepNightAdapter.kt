@@ -17,10 +17,12 @@
 package com.example.android.trackmysleepquality.sleeptracker
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.android.trackmysleepquality.R
 import com.example.android.trackmysleepquality.database.SleepNight
 import com.example.android.trackmysleepquality.databinding.ListItemSleepNightBinding
 
@@ -31,14 +33,14 @@ class SleepNightAdapter(val clickListener: SleepNightListener): ListAdapter<Data
     * viewHolder is used, TextItemViewHolder is a pre-made viewHolder which u can find in Util.kt file,
     * this fun returns a viewHolder that takes a view as an argument. This function is called when the app starts
     * at first time and when the views displayed on the screen increase */
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ViewHolder.from(parent)
     }
 
     /*onBindViewHolder(): is called to bind an item at a specified position in the list to the
     * viewHolder. This fun also RECYCLES the views as it uses viewholders of items that are no longer on the screen
     * and reset its values with the values of the item that will be displayed on the screen  */
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = getItem(position)
         //set the values of viewHolder properties to the items values
         holder.bind(item, clickListener)
@@ -64,6 +66,16 @@ class SleepNightAdapter(val clickListener: SleepNightListener): ListAdapter<Data
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ListItemSleepNightBinding.inflate(layoutInflater,parent,false)
                 return ViewHolder(binding)
+            }
+        }
+    }
+
+    class TextViewHolder(view: View): RecyclerView.ViewHolder(view) {
+        companion object {
+            fun from(parent: ViewGroup): TextViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val view = layoutInflater.inflate(R.layout.header, parent, false)
+                return TextViewHolder(view)
             }
         }
     }
