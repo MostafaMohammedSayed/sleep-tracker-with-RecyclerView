@@ -56,7 +56,7 @@ class SleepNightAdapter: ListAdapter<SleepNight,SleepNightAdapter.ViewHolder>(Sl
             item: SleepNight
         ) {
             binding.sleep = item
-            binding.executePendingBindings()
+            binding.executePendingBindings()//slightly faster to bind the views
         }
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
