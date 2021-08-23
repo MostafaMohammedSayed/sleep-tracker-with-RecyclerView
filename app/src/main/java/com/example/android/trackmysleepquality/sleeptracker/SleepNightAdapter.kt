@@ -79,4 +79,8 @@ class SleepNightDiffCallback: DiffUtil.ItemCallback<SleepNight>() {
 
 }
 
+class SleepNightListener(val clickListener: (nightId: Long)-> Unit){
+    fun onClick(night: SleepNight)= clickListener(night.nightId)
+}
+
 
