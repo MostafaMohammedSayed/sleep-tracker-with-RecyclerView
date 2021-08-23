@@ -56,10 +56,12 @@ class SleepNightAdapter(val clickListener: SleepNightListener): ListAdapter<Data
     * viewHolder. This fun also RECYCLES the views as it uses viewholders of items that are no longer on the screen
     * and reset its values with the values of the item that will be displayed on the screen  */
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val item = getItem(position)
-        //set the values of viewHolder properties to the items values
-        holder.bind(item, clickListener)
-
+        when(holder){
+            is ViewHolder->{
+                val nightItem = getItem(position) as DataItem.SleepNightItem
+                holder.bind(nightItem.sleepNight,clickListener)
+            }
+        }
     }
 
 
