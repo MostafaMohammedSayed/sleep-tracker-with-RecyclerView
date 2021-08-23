@@ -24,7 +24,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.android.trackmysleepquality.database.SleepNight
 import com.example.android.trackmysleepquality.databinding.ListItemSleepNightBinding
 
-class SleepNightAdapter(val clickListener: SleepNightListener): ListAdapter<SleepNight,SleepNightAdapter.ViewHolder>(SleepNightDiffCallback()){
+class SleepNightAdapter(val clickListener: SleepNightListener): ListAdapter<SleepNight,RecyclerView.ViewHolder>(SleepNightDiffCallback()){
 
     /*onCreateViewHolder(): creates the viewHolder that the RV will deal with since RV does not deal
     * with data, the arguments: parent which is the RV itself, ViewType is an Int that will be used if more than 1
