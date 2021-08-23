@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.android.trackmysleepquality.R
 import com.example.android.trackmysleepquality.database.SleepNight
 import com.example.android.trackmysleepquality.databinding.ListItemSleepNightBinding
+import java.lang.ClassCastException
 
 private val ITEM_VIEW_TYPE_HEADER = 0
 private val ITEM_VIEW_TYPE_ITEM = 1
@@ -44,7 +45,11 @@ class SleepNightAdapter(val clickListener: SleepNightListener): ListAdapter<Data
         * this fun returns a viewHolder that takes a view as an argument. This function is called when the app starts
         * at first time and when the views displayed on the screen increase */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return ViewHolder.from(parent)
+        return when(viewType){
+            ITEM_VIEW_TYPE_HEADER->TextViewHolder.from(parent)
+            ITEM_VIEW_TYPE_ITEM->ViewHolder.from(parent)
+            else->throw ClassCastException("Unknown viewType ${viewType}")
+        }
     }
 
     /*onBindViewHolder(): is called to bind an item at a specified position in the list to the
