@@ -31,11 +31,18 @@ private val ITEM_VIEW_TYPE_ITEM = 1
 
 class SleepNightAdapter(val clickListener: SleepNightListener): ListAdapter<DataItem,RecyclerView.ViewHolder>(SleepNightDiffCallback()){
 
+    override fun getItemViewType(position: Int): Int {
+        return when(getItem(position)){
+            is DataItem.Header-> ITEM_VIEW_TYPE_HEADER
+            is DataItem.SleepNightItem-> ITEM_VIEW_TYPE_ITEM
+        }
+    }
+
     /*onCreateViewHolder(): creates the viewHolder that the RV will deal with since RV does not deal
-    * with data, the arguments: parent which is the RV itself, ViewType is an Int that will be used if more than 1
-    * viewHolder is used, TextItemViewHolder is a pre-made viewHolder which u can find in Util.kt file,
-    * this fun returns a viewHolder that takes a view as an argument. This function is called when the app starts
-    * at first time and when the views displayed on the screen increase */
+        * with data, the arguments: parent which is the RV itself, ViewType is an Int that will be used if more than 1
+        * viewHolder is used, TextItemViewHolder is a pre-made viewHolder which u can find in Util.kt file,
+        * this fun returns a viewHolder that takes a view as an argument. This function is called when the app starts
+        * at first time and when the views displayed on the screen increase */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ViewHolder.from(parent)
     }
